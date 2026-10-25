@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import "./App.css"
 
-
 const API_URL = "https://api.sampleapis.com/countries/countries"
 
 export default function App() {
@@ -18,14 +17,13 @@ export default function App() {
       const res = await fetch(API_URL)
       if (!res.ok) throw new Error("API failed: " + res.status)
       const data = await res.json()
-      // ye API thoda different format deti hai
       const formatted = data.map((c, index) => ({
         cca3: c.id || c.name + index,
         name: { common: c.name },
         capital: [c.capital],
         region: c.region || "Unknown",
         population: c.population || 0,
-        flags: { png: c.media?.flag || `https://flagcdn.com/w320/${c.alpha2Code?.toLowerCase()}.png` }
+        flags: { png: c.media?.flag || `https://flagcdn.com/w320/${(c.alpha2Code || 'pk').toLowerCase()}.png` }
       }))
       setCountries(formatted)
     } catch (err) {
@@ -36,9 +34,7 @@ export default function App() {
     }
   }
 
-  useEffect(() => {
-    fetchCountries()
-  }, [])
+  useEffect(() => { fetchCountries() }, [])
 
   const filtered = useMemo(() => {
     return countries.filter((c) => {
@@ -80,13 +76,15 @@ export default function App() {
             <div className="skeleton line" />
           </div>
         ))}
+
         {!loading && error && (
-  <div className="error-box">
-    <h2>Something went wrong</h2>
-    <p>{error}</p>
-    <button onClick={fetchCountries} className="retry">Try Again</button>
-  </div>
-)}
+          <div className="error-box">
+            <h2>Something went wrong</h2>
+            <p>{error}</p>
+            <button onClick={fetchCountries} className="retry">Try Again</button>
+          </div>
+        )}
+
         {!loading && !error && filtered.map((c) => (
           <article key={c.cca3} className="card">
             <img src={c.flags.png} alt={c.name.common} className="flag" loading="lazy" onError={(e) => e.target.style.display = 'none'} />
@@ -94,7 +92,7 @@ export default function App() {
               <h2>{c.name.common}</h2>
               <p><strong>Capital:</strong> {c.capital?.[0] || "N/A"}</p>
               <p><strong>Region:</strong> {c.region}</p>
-              <p><strong>Population:</strong> {c.population?.toLocaleString()}</p>
+              <p><strong>Population:</strong> {Number(c.population).toLocaleString()}</p>
             </div>
           </article>
         ))}
