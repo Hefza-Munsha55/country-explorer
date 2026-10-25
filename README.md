@@ -5,7 +5,7 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/) [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com) [![License: MIT](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](#)
 
 **🔗 Live Demo:** https://country-app.vercel.app
-**📹 Video Demo:** LinkedIn Post Link
+**📹 Video Demo:** https://lnkd.in/p/dX_wS5FP
 
 ### ✨ Overview
 Country Explorer solves the common CORS issues with country APIs by using a stable, reliable API. It provides instant search, region-based filtering, and handles all UI states (Loading, Error, Empty, Success) gracefully. This project was built as part of Zenvio Internship - Week 2 Task focusing on API integration and state management.
